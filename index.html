@@ -8,9 +8,9 @@
 </head>
 <body>
   <main class="page">
-    <section class="panel no-print">
+    <section class="panel">
       <h1>出勤タイムカード</h1>
-      <p class="hint">名前を選んで、出勤・退勤などを押してください。</p>
+      <p class="hint">名前を選んで、打刻してください。勤務表はスプレッドシートに自動反映されます。</p>
 
       <div class="employee-grid" id="employeeButtons"></div>
 
@@ -25,62 +25,16 @@
         <button type="button" data-action="中退">中退</button>
         <button type="button" data-action="祝日">祝日</button>
         <button type="button" data-action="有給">有給</button>
-        <button type="button" id="refreshButton" class="sub-button">更新</button>
+      </div>
+
+      <div class="pdf-area">
+        <button type="button" id="pdfButton" class="pdf-button">PDF出力</button>
+        <p class="small">選択中の人の今月分シートをPDFにします。</p>
       </div>
 
       <p id="message" class="message" aria-live="polite"></p>
-    </section>
 
-    <section class="sheet-wrap">
-      <div class="sheet-header">
-        <div class="title">出 勤 表</div>
-        <div class="era" id="eraTitle">令和 年 月分</div>
-      </div>
-
-      <div class="employee-line">
-        <div class="employee-no-label">社員番号</div>
-        <div class="employee-no" id="employeeNo">---</div>
-        <div class="employee-name" id="employeeName">名前を選択</div>
-      </div>
-
-      <table class="attendance-table" id="attendanceTable">
-        <thead>
-          <tr>
-            <th>月　日</th>
-            <th>曜 日</th>
-            <th>出　勤</th>
-            <th>終　了</th>
-            <th>時　間</th>
-            <th>時 間 外</th>
-            <th>週40時間超</th>
-            <th>不就労時間</th>
-          </tr>
-        </thead>
-        <tbody id="attendanceBody"></tbody>
-      </table>
-
-      <div class="summary-area">
-        <div class="workdays-label">出勤日数</div>
-        <div class="workdays-value" id="totalDays"></div>
-        <div class="workdays-unit">日</div>
-
-        <div class="summary-right">
-          <div class="summary-row overtime-row">
-            <div class="summary-label">残業</div>
-            <div class="summary-value" id="totalOvertime"></div>
-            <div class="summary-unit">h</div>
-            <div class="summary-value blank-summary"></div>
-            <div class="summary-unit">h</div>
-            <div class="summary-value blank-summary"></div>
-            <div class="summary-unit">h</div>
-          </div>
-          <div class="summary-row total-row">
-            <div class="summary-label">総労働時間</div>
-            <div class="summary-value total-hours" id="totalHours"></div>
-            <div class="summary-unit">h</div>
-          </div>
-        </div>
-      </div>
+      <div id="pdfLinkArea" class="pdf-link-area"></div>
     </section>
   </main>
 
