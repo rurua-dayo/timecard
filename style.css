@@ -174,3 +174,217 @@ body {
   .page { max-width: none; padding: 0; }
   .sheet-wrap { border: 0; padding: 0; overflow: visible; }
 }
+/* ===== 出勤表を崩さない固定レイアウト ===== */
+
+.sheet-wrap {
+  width: 297mm;
+  min-height: 210mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 10mm;
+  overflow: visible;
+}
+
+.attendance-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.attendance-table th,
+.attendance-table td {
+  border: 2px solid #111;
+  height: 7.5mm;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.attendance-table th:nth-child(1),
+.attendance-table td:nth-child(1) {
+  width: 22mm;
+}
+
+.attendance-table th:nth-child(2),
+.attendance-table td:nth-child(2) {
+  width: 14mm;
+}
+
+.attendance-table th:nth-child(3),
+.attendance-table td:nth-child(3) {
+  width: 24mm;
+}
+
+.attendance-table th:nth-child(4),
+.attendance-table td:nth-child(4) {
+  width: 24mm;
+}
+
+.attendance-table th:nth-child(5),
+.attendance-table td:nth-child(5) {
+  width: 18mm;
+}
+
+.attendance-table th:nth-child(6),
+.attendance-table td:nth-child(6) {
+  width: 22mm;
+}
+
+.attendance-table th:nth-child(7),
+.attendance-table td:nth-child(7) {
+  width: 32mm;
+}
+
+.attendance-table th:nth-child(8),
+.attendance-table td:nth-child(8) {
+  width: 30mm;
+}
+
+.sheet-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  margin-bottom: 5mm;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+}
+
+.era {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.employee-line {
+  display: grid;
+  grid-template-columns: 35mm 28mm 65mm 1fr;
+  gap: 2mm;
+  margin-bottom: 4mm;
+}
+
+.employee-no-label,
+.employee-no,
+.employee-name {
+  border-bottom: 2px solid #111;
+  min-height: 8mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.employee-name {
+  font-size: 22px;
+}
+
+.summary-area {
+  display: grid;
+  grid-template-columns: 38mm 35mm 15mm 1fr;
+  gap: 0 3mm;
+  margin-top: 3mm;
+}
+
+.workdays-label,
+.workdays-value,
+.workdays-unit,
+.summary-label,
+.summary-value,
+.summary-unit {
+  border: 2px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  font-weight: 800;
+}
+
+.workdays-label {
+  font-size: 22px;
+  justify-content: flex-start;
+  padding-left: 3mm;
+}
+
+.workdays-value,
+.workdays-unit {
+  min-height: 16mm;
+  font-size: 20px;
+}
+
+.summary-right {
+  display: grid;
+  grid-template-rows: 8mm 8mm;
+}
+
+.overtime-row {
+  display: grid;
+  grid-template-columns: 35mm 1fr 10mm 1fr 10mm 1fr 10mm;
+}
+
+.total-row {
+  display: grid;
+  grid-template-columns: 35mm 1fr 10mm;
+}
+
+.summary-label,
+.summary-value,
+.summary-unit {
+  min-height: 8mm;
+  font-size: 14px;
+}
+
+.total-row .summary-label,
+.total-row .summary-value,
+.total-row .summary-unit {
+  border-top: 0;
+}
+
+.overtime-row .summary-value,
+.overtime-row .summary-unit,
+.total-row .summary-value,
+.total-row .summary-unit {
+  border-left: 0;
+}
+
+/* スマホでも表自体は崩さず、横スクロールにする */
+.sheet-wrap {
+  max-width: none;
+}
+
+.page {
+  overflow-x: auto;
+}
+
+/* 印刷時はA4横 */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  .page {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .sheet-wrap {
+    width: 281mm;
+    min-height: auto;
+    padding: 0;
+    border: 0;
+  }
+}
