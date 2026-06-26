@@ -329,3 +329,12 @@ body {
     margin: 0;
   }
 }
+.panel {
+  position: relative;
+  z-index: 10;
+}
+
+.sheet-wrap {
+  position: relative;
+  z-index: 1;
+}
