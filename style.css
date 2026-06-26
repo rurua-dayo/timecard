@@ -1,30 +1,50 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background: #f2f2f2;
   color: #111;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Yu Gothic", "Yu Gothic UI", sans-serif;
 }
+
 .page {
-  max-width: 1120px;
+  max-width: none;
   margin: 0 auto;
   padding: 18px;
+  overflow-x: auto;
 }
+
+/* 操作パネル */
 .panel {
+  max-width: 1120px;
+  margin: 0 auto 18px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 14px;
   padding: 18px;
-  margin-bottom: 18px;
 }
-.panel h1 { margin: 0 0 8px; font-size: 24px; }
-.hint { margin: 0 0 14px; color: #555; }
-.employee-grid, .punch-grid {
+
+.panel h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.hint {
+  margin: 0 0 14px;
+  color: #555;
+}
+
+.employee-grid,
+.punch-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
-.employee-grid button, .punch-grid button {
+
+.employee-grid button,
+.punch-grid button {
   min-height: 48px;
   border: 2px solid #111;
   background: #fff;
@@ -33,10 +53,12 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
+
 .employee-grid button.active {
   background: #111;
   color: #fff;
 }
+
 .selected-box {
   margin: 14px 0;
   padding: 10px 12px;
@@ -46,135 +68,34 @@ body {
   gap: 14px;
   align-items: center;
 }
-.selected-box span { color: #666; }
-.selected-box strong { font-size: 20px; }
-.sub-button { background: #eee !important; }
-.message { min-height: 24px; margin: 12px 0 0; font-weight: 700; }
-.message.ok { color: #146b2f; }
-.message.error { color: #b00020; }
 
-.sheet-wrap {
-  background: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  width: 100%;
-  overflow-x: auto;
+.selected-box span {
+  color: #666;
 }
-.sheet-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: end;
-  margin-bottom: 14px;
-}
-.title {
-  font-weight: 900;
-  font-size: 34px;
-  letter-spacing: .18em;
-}
-.era {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-}
-.employee-line {
-  display: grid;
-  grid-template-columns: 150px 120px 280px 1fr;
-  align-items: end;
-  gap: 8px;
-  margin: 0 0 10px;
-}
-.employee-no-label, .employee-no, .employee-name {
-  border-bottom: 3px solid #111;
-  min-height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
+
+.selected-box strong {
   font-size: 20px;
 }
-.employee-name { font-size: 28px; }
-.attendance-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  font-size: 18px;
-  background: #fff;
-}
-.attendance-table th, .attendance-table td {
-  border: 2px solid #111;
-  height: 28px;
-  text-align: center;
-  vertical-align: middle;
-  padding: 2px 4px;
-}
-.attendance-table th {
-  font-weight: 900;
-  height: 32px;
-}
-.attendance-table th:nth-child(1), .attendance-table td:nth-child(1) { width: 110px; }
-.attendance-table th:nth-child(2), .attendance-table td:nth-child(2) { width: 70px; }
-.attendance-table th:nth-child(3), .attendance-table td:nth-child(3) { width: 130px; }
-.attendance-table th:nth-child(4), .attendance-table td:nth-child(4) { width: 130px; }
-.attendance-table th:nth-child(5), .attendance-table td:nth-child(5) { width: 90px; }
-.attendance-table th:nth-child(6), .attendance-table td:nth-child(6) { width: 110px; }
-.attendance-table th:nth-child(7), .attendance-table td:nth-child(7) { width: 140px; }
-.attendance-table th:nth-child(8), .attendance-table td:nth-child(8) { width: 130px; }
 
-.summary-area {
-  display: grid;
-  grid-template-columns: 170px 170px 70px 1fr;
-  gap: 0 12px;
-  margin-top: 12px;
-  align-items: stretch;
-}
-.workdays-label, .workdays-value, .workdays-unit,
-.summary-label, .summary-value, .summary-unit {
-  border: 2px solid #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 58px;
-  font-weight: 800;
-  background: #fff;
-}
-.workdays-label {
-  font-size: 32px;
-  justify-content: flex-start;
-  padding-left: 14px;
-}
-.workdays-value { font-size: 24px; }
-.workdays-unit { font-size: 32px; }
-.summary-right {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  border: 0;
-}
-.summary-row { display: grid; }
-.overtime-row { grid-template-columns: 170px 1fr 45px 1fr 45px 1fr 45px; }
-.total-row { grid-template-columns: 170px 1fr 45px; }
-.summary-label { font-size: 20px; }
-.summary-value, .summary-unit { font-size: 20px; min-height: 29px; }
-.total-row .summary-label, .total-row .summary-value, .total-row .summary-unit { border-top: 0; }
-.overtime-row .summary-value, .overtime-row .summary-unit,
-.total-row .summary-value, .total-row .summary-unit { border-left: 0; }
-
-@media (max-width: 720px) {
-  .employee-grid, .punch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sheet-wrap { padding: 12px; }
-  .sheet-header { grid-template-columns: 1fr; gap: 8px; }
-  .era { text-align: left; }
-  .employee-line { grid-template-columns: 110px 90px 180px; }
-  .summary-area { min-width: 900px; }
-  .attendance-table { min-width: 900px; }
+.sub-button {
+  background: #eee !important;
 }
 
-@media print {
-  body { background: #fff; }
-  .no-print { display: none; }
-  .page { max-width: none; padding: 0; }
-  .sheet-wrap { border: 0; padding: 0; overflow: visible; }
+.message {
+  min-height: 24px;
+  margin: 12px 0 0;
+  font-weight: 700;
 }
-/* ===== 出勤表を崩さない固定レイアウト ===== */
+
+.message.ok {
+  color: #146b2f;
+}
+
+.message.error {
+  color: #b00020;
+}
+
+/* ===== 出勤表：A4横固定 ===== */
 
 .sheet-wrap {
   width: 297mm;
@@ -182,13 +103,60 @@ body {
   margin: 0 auto;
   background: #fff;
   padding: 10mm;
+  border: 1px solid #ddd;
   overflow: visible;
 }
 
+/* 見出し */
+.sheet-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  margin-bottom: 5mm;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+}
+
+.era {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 社員番号・名前 */
+.employee-line {
+  display: grid;
+  grid-template-columns: 35mm 28mm 65mm 1fr;
+  gap: 2mm;
+  margin-bottom: 4mm;
+}
+
+.employee-no-label,
+.employee-no,
+.employee-name {
+  border-bottom: 2px solid #111;
+  min-height: 8mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.employee-name {
+  font-size: 22px;
+}
+
+/* 出勤表本体 */
 .attendance-table {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
+  background: #fff;
 }
 
 .attendance-table th,
@@ -203,6 +171,11 @@ body {
   white-space: nowrap;
 }
 
+.attendance-table th {
+  font-weight: 900;
+}
+
+/* 列幅 */
 .attendance-table th:nth-child(1),
 .attendance-table td:nth-child(1) {
   width: 22mm;
@@ -243,52 +216,13 @@ body {
   width: 30mm;
 }
 
-.sheet-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: end;
-  margin-bottom: 5mm;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 0.25em;
-}
-
-.era {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.employee-line {
-  display: grid;
-  grid-template-columns: 35mm 28mm 65mm 1fr;
-  gap: 2mm;
-  margin-bottom: 4mm;
-}
-
-.employee-no-label,
-.employee-no,
-.employee-name {
-  border-bottom: 2px solid #111;
-  min-height: 8mm;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-}
-
-.employee-name {
-  font-size: 22px;
-}
-
+/* 下部集計欄 */
 .summary-area {
   display: grid;
   grid-template-columns: 38mm 35mm 15mm 1fr;
   gap: 0 3mm;
   margin-top: 3mm;
+  align-items: stretch;
 }
 
 .workdays-label,
@@ -306,6 +240,7 @@ body {
 }
 
 .workdays-label {
+  min-height: 16mm;
   font-size: 22px;
   justify-content: flex-start;
   padding-left: 3mm;
@@ -322,13 +257,15 @@ body {
   grid-template-rows: 8mm 8mm;
 }
 
-.overtime-row {
+.summary-row {
   display: grid;
+}
+
+.overtime-row {
   grid-template-columns: 35mm 1fr 10mm 1fr 10mm 1fr 10mm;
 }
 
 .total-row {
-  display: grid;
   grid-template-columns: 35mm 1fr 10mm;
 }
 
@@ -352,16 +289,19 @@ body {
   border-left: 0;
 }
 
-/* スマホでも表自体は崩さず、横スクロールにする */
-.sheet-wrap {
-  max-width: none;
+/* スマホ・狭い画面 */
+@media (max-width: 720px) {
+  .employee-grid,
+  .punch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sheet-wrap {
+    margin: 0;
+  }
 }
 
-.page {
-  overflow-x: auto;
-}
-
-/* 印刷時はA4横 */
+/* 印刷 */
 @media print {
   @page {
     size: A4 landscape;
@@ -386,5 +326,6 @@ body {
     min-height: auto;
     padding: 0;
     border: 0;
+    margin: 0;
   }
 }
