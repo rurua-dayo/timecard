@@ -7,18 +7,81 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="card">
-    <h1>出勤タイムカード</h1>
+  <main class="page">
+    <section class="panel no-print">
+      <h1>出勤タイムカード</h1>
+      <p class="hint">名前を選んで、出勤・退勤などを押してください。</p>
 
-    <label class="label" for="name">名前</label>
-    <input id="name" class="input" type="text" placeholder="例：手塚" autocomplete="name">
+      <div class="employee-grid" id="employeeButtons"></div>
 
-    <div class="buttons">
-      <button id="clockIn" class="button primary" type="button">出勤</button>
-      <button id="clockOut" class="button secondary" type="button">退勤</button>
-    </div>
+      <div class="selected-box">
+        <span>選択中</span>
+        <strong id="selectedEmployee">未選択</strong>
+      </div>
 
-    <p id="message" class="message" aria-live="polite"></p>
+      <div class="punch-grid">
+        <button type="button" data-action="出勤">出勤</button>
+        <button type="button" data-action="退勤">退勤</button>
+        <button type="button" data-action="中退">中退</button>
+        <button type="button" data-action="祝日">祝日</button>
+        <button type="button" data-action="有給">有給</button>
+        <button type="button" id="refreshButton" class="sub-button">更新</button>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="sheet-wrap">
+      <div class="sheet-header">
+        <div class="title">出 勤 表</div>
+        <div class="era" id="eraTitle">令和 年 月分</div>
+      </div>
+
+      <div class="employee-line">
+        <div class="employee-no-label">社員番号</div>
+        <div class="employee-no" id="employeeNo">---</div>
+        <div class="employee-name" id="employeeName">名前を選択</div>
+      </div>
+
+      <table class="attendance-table" id="attendanceTable">
+        <thead>
+          <tr>
+            <th>月　日</th>
+            <th>曜 日</th>
+            <th>出　勤</th>
+            <th>終　了</th>
+            <th>時　間</th>
+            <th>時 間 外</th>
+            <th>週40時間超</th>
+            <th>不就労時間</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceBody"></tbody>
+      </table>
+
+      <div class="summary-area">
+        <div class="workdays-label">出勤日数</div>
+        <div class="workdays-value" id="totalDays"></div>
+        <div class="workdays-unit">日</div>
+
+        <div class="summary-right">
+          <div class="summary-row overtime-row">
+            <div class="summary-label">残業</div>
+            <div class="summary-value" id="totalOvertime"></div>
+            <div class="summary-unit">h</div>
+            <div class="summary-value blank-summary"></div>
+            <div class="summary-unit">h</div>
+            <div class="summary-value blank-summary"></div>
+            <div class="summary-unit">h</div>
+          </div>
+          <div class="summary-row total-row">
+            <div class="summary-label">総労働時間</div>
+            <div class="summary-value total-hours" id="totalHours"></div>
+            <div class="summary-unit">h</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="./app.js"></script>
