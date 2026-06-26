@@ -10,47 +10,52 @@ body {
 }
 
 .page {
-  max-width: none;
-  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 18px;
-  overflow-x: auto;
 }
 
-/* 操作パネル */
 .panel {
-  max-width: 1120px;
-  margin: 0 auto 18px;
+  width: 100%;
+  max-width: 720px;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 14px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
 }
 
-.panel h1 {
+h1 {
   margin: 0 0 8px;
-  font-size: 24px;
+  font-size: 28px;
+  text-align: center;
 }
 
 .hint {
-  margin: 0 0 14px;
+  margin: 0 0 18px;
   color: #555;
+  text-align: center;
+  line-height: 1.6;
 }
 
-.employee-grid,
-.punch-grid {
+.employee-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
+  margin-bottom: 14px;
 }
 
 .employee-grid button,
-.punch-grid button {
-  min-height: 48px;
+.punch-grid button,
+.pdf-button {
+  min-height: 52px;
   border: 2px solid #111;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
 }
 
@@ -61,12 +66,13 @@ body {
 
 .selected-box {
   margin: 14px 0;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   gap: 14px;
   align-items: center;
+  justify-content: center;
 }
 
 .selected-box span {
@@ -74,17 +80,60 @@ body {
 }
 
 .selected-box strong {
-  font-size: 20px;
+  font-size: 22px;
 }
 
-.sub-button {
-  background: #eee !important;
+.punch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.punch-grid button[data-action="出勤"] {
+  background: #e9f8ee;
+}
+
+.punch-grid button[data-action="退勤"] {
+  background: #eef3ff;
+}
+
+.punch-grid button[data-action="中退"] {
+  background: #fff7e8;
+}
+
+.punch-grid button[data-action="祝日"] {
+  background: #f5f5f5;
+}
+
+.punch-grid button[data-action="有給"] {
+  background: #fff0f5;
+}
+
+.pdf-area {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.pdf-button {
+  width: 100%;
+  background: #111;
+  color: #fff;
+}
+
+.small {
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 14px;
 }
 
 .message {
-  min-height: 24px;
-  margin: 12px 0 0;
-  font-weight: 700;
+  min-height: 26px;
+  margin: 16px 0 0;
+  text-align: center;
+  font-weight: 800;
 }
 
 .message.ok {
@@ -95,246 +144,35 @@ body {
   color: #b00020;
 }
 
-/* ===== 出勤表：A4横固定 ===== */
-
-.sheet-wrap {
-  width: 297mm;
-  min-height: 210mm;
-  margin: 0 auto;
-  background: #fff;
-  padding: 10mm;
-  border: 1px solid #ddd;
-  overflow: visible;
-}
-
-/* 見出し */
-.sheet-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: end;
-  margin-bottom: 5mm;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 0.25em;
-}
-
-.era {
+.pdf-link-area {
+  margin-top: 14px;
   text-align: center;
-  font-size: 18px;
-  font-weight: 700;
 }
 
-/* 社員番号・名前 */
-.employee-line {
-  display: grid;
-  grid-template-columns: 35mm 28mm 65mm 1fr;
-  gap: 2mm;
-  margin-bottom: 4mm;
-}
-
-.employee-no-label,
-.employee-no,
-.employee-name {
-  border-bottom: 2px solid #111;
-  min-height: 8mm;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 16px;
-}
-
-.employee-name {
-  font-size: 22px;
-}
-
-/* 出勤表本体 */
-.attendance-table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  background: #fff;
-}
-
-.attendance-table th,
-.attendance-table td {
-  border: 2px solid #111;
-  height: 7.5mm;
-  padding: 0;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.attendance-table th {
-  font-weight: 900;
-}
-
-/* 列幅 */
-.attendance-table th:nth-child(1),
-.attendance-table td:nth-child(1) {
-  width: 22mm;
-}
-
-.attendance-table th:nth-child(2),
-.attendance-table td:nth-child(2) {
-  width: 14mm;
-}
-
-.attendance-table th:nth-child(3),
-.attendance-table td:nth-child(3) {
-  width: 24mm;
-}
-
-.attendance-table th:nth-child(4),
-.attendance-table td:nth-child(4) {
-  width: 24mm;
-}
-
-.attendance-table th:nth-child(5),
-.attendance-table td:nth-child(5) {
-  width: 18mm;
-}
-
-.attendance-table th:nth-child(6),
-.attendance-table td:nth-child(6) {
-  width: 22mm;
-}
-
-.attendance-table th:nth-child(7),
-.attendance-table td:nth-child(7) {
-  width: 32mm;
-}
-
-.attendance-table th:nth-child(8),
-.attendance-table td:nth-child(8) {
-  width: 30mm;
-}
-
-/* 下部集計欄 */
-.summary-area {
-  display: grid;
-  grid-template-columns: 38mm 35mm 15mm 1fr;
-  gap: 0 3mm;
-  margin-top: 3mm;
-  align-items: stretch;
-}
-
-.workdays-label,
-.workdays-value,
-.workdays-unit,
-.summary-label,
-.summary-value,
-.summary-unit {
-  border: 2px solid #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
+.pdf-link-area a {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
   font-weight: 800;
 }
 
-.workdays-label {
-  min-height: 16mm;
-  font-size: 22px;
-  justify-content: flex-start;
-  padding-left: 3mm;
-}
-
-.workdays-value,
-.workdays-unit {
-  min-height: 16mm;
-  font-size: 20px;
-}
-
-.summary-right {
-  display: grid;
-  grid-template-rows: 8mm 8mm;
-}
-
-.summary-row {
-  display: grid;
-}
-
-.overtime-row {
-  grid-template-columns: 35mm 1fr 10mm 1fr 10mm 1fr 10mm;
-}
-
-.total-row {
-  grid-template-columns: 35mm 1fr 10mm;
-}
-
-.summary-label,
-.summary-value,
-.summary-unit {
-  min-height: 8mm;
-  font-size: 14px;
-}
-
-.total-row .summary-label,
-.total-row .summary-value,
-.total-row .summary-unit {
-  border-top: 0;
-}
-
-.overtime-row .summary-value,
-.overtime-row .summary-unit,
-.total-row .summary-value,
-.total-row .summary-unit {
-  border-left: 0;
-}
-
-/* スマホ・狭い画面 */
 @media (max-width: 720px) {
-  .employee-grid,
+  .page {
+    align-items: flex-start;
+  }
+
+  .employee-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .punch-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sheet-wrap {
-    margin: 0;
+  .punch-grid button:last-child {
+    grid-column: span 2;
   }
-}
-
-/* 印刷 */
-@media print {
-  @page {
-    size: A4 landscape;
-    margin: 8mm;
-  }
-
-  body {
-    background: #fff;
-  }
-
-  .no-print {
-    display: none;
-  }
-
-  .page {
-    padding: 0;
-    overflow: visible;
-  }
-
-  .sheet-wrap {
-    width: 281mm;
-    min-height: auto;
-    padding: 0;
-    border: 0;
-    margin: 0;
-  }
-}
-.panel {
-  position: relative;
-  z-index: 10;
-}
-
-.sheet-wrap {
-  position: relative;
-  z-index: 1;
 }
