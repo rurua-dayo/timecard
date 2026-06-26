@@ -1,5 +1,5 @@
 // Google Apps Script のウェブアプリURLを入れてください
-const ENDPOINT_URL = "ここにApps ScriptのウェブアプリURLを貼る";
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbxQU-UHzTi_z4WI-q9wIsKpR70krj8OKXsPM18i1eJHpPkPsZOfCQnJ9ldMis1WUh7Ogg/exec";
 
 const EMPLOYEES = [
   { name: "手塚", no: "022" },
